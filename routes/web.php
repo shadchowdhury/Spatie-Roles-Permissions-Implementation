@@ -1,0 +1,28 @@
+<?php
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RolePermissionController;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('roles', [RolePermissionController::class, 'openRolesPage'])->name('roles.index');
+Route::get('roles/create', [RolePermissionController::class, 'openCreateRolePage'])->name('roles.create');
+
+Route::get('permissions', [RolePermissionController::class, 'openpermissionsPage'])->name('permissions.index');
+Route::get('permissions/create', [RolePermissionController::class, 'openCreatePermissionPage'])->name('permissions.create');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
