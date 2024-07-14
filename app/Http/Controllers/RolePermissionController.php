@@ -16,6 +16,13 @@ class RolePermissionController extends Controller
         return view('roles.create');
     }
 
+    public function storeRole(Request $request)
+    {
+        $role = $request->name;
+
+        dd($role);
+    }
+
     public function openPermissionsPage()
     {
         return view('permissions.index');
@@ -24,5 +31,12 @@ class RolePermissionController extends Controller
     public function openCreatePermissionPage()
     {
         return view('permissions.create');
+    }
+
+    public function storePermission(Request $request)
+    {
+        $permission = $request->name;
+
+        dd($permission);
     }
 }

@@ -14,10 +14,11 @@ Route::get('/dashboard', function () {
 
 Route::get('roles', [RolePermissionController::class, 'openRolesPage'])->name('roles.index');
 Route::get('roles/create', [RolePermissionController::class, 'openCreateRolePage'])->name('roles.create');
+Route::post('roles', [RolePermissionController::class, 'storeRole'])->name('roles.store');
 
 Route::get('permissions', [RolePermissionController::class, 'openpermissionsPage'])->name('permissions.index');
 Route::get('permissions/create', [RolePermissionController::class, 'openCreatePermissionPage'])->name('permissions.create');
-
+Route::post('permissions', [RolePermissionController::class, 'storePermission'])->name('permissions.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
