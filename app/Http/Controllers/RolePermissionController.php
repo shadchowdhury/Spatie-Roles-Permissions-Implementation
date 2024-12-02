@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolePermissionController extends Controller
 {
     public function openRolesPage()
     {
-        return view('roles.index');
+        $roles = Role::all();
+        return view('roles.index', compact('roles'));
     }
 
     public function openCreateRolePage()
@@ -20,12 +23,18 @@ class RolePermissionController extends Controller
     {
         $role = $request->name;
 
-        dd($role);
+        Role::create([
+            'name' => $role
+        ]);
+
+        session()->flash('success_msg', 'Role created successfully');
+        return redirect()->route('roles.index');
     }
 
     public function openPermissionsPage()
     {
-        return view('permissions.index');
+        $permissions = Permission::all();
+        return view('permissions.index', compact('permissions'));
     }
 
     public function openCreatePermissionPage()
@@ -37,6 +46,11 @@ class RolePermissionController extends Controller
     {
         $permission = $request->name;
 
-        dd($permission);
+        Permission::create([
+            'name' => $permission
+        ]);
+
+        session()->flash('success_msg', 'Permission created successfully');
+        return redirect()->route('permissions.index');
     }
 }

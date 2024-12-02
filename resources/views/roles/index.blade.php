@@ -12,6 +12,12 @@
 
                     <a href="{{ route('roles.create') }}" class="btn btn-info mb-2">New Role</a>
 
+                    @if (session('success_msg'))
+                        <div class="alert alert-success">
+                            {{ session('success_msg') }}
+                        </div>
+                    @endif
+
                     <h3 class="text-center mt-3 mb-3" style="font-size: 24px"><b>Roles</b></h3>
                     <table class="table">
                         <thead>
@@ -19,10 +25,12 @@
                             <th>Created At</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Demo</td>
-                                <td>07/13/2024</td>
-                            </tr>
+                            @foreach ($roles as $role)
+                                <tr>
+                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $role->created_at->diffForHumans() }}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

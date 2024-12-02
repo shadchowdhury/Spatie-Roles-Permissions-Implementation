@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssignPermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolePermissionController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,8 @@ Route::post('roles', [RolePermissionController::class, 'storeRole'])->name('role
 Route::get('permissions', [RolePermissionController::class, 'openpermissionsPage'])->name('permissions.index');
 Route::get('permissions/create', [RolePermissionController::class, 'openCreatePermissionPage'])->name('permissions.create');
 Route::post('permissions', [RolePermissionController::class, 'storePermission'])->name('permissions.store');
+
+Route::get('assign-permissions', [AssignPermissionController::class, 'assignPermissions']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
