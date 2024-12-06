@@ -22,6 +22,7 @@ Route::get('permissions/create', [RolePermissionController::class, 'openCreatePe
 Route::post('permissions', [RolePermissionController::class, 'storePermission'])->name('permissions.store');
 
 Route::get('assign-permissions', [AssignPermissionController::class, 'assignPermissions']);
+Route::get('assign-permissions-to-roles', [AssignPermissionController::class, 'assignPermissionsToRoles']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
